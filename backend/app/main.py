@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.core.config import settings
 from app.database.database import Base, engine
-from app.api import users
+from app.api import auth, users
 
 
 import app.models
@@ -18,6 +18,12 @@ app.include_router(
     users.router,
     prefix="/api/v1/users",
     tags=["Users"],
+)
+
+app.include_router(
+    auth.router,
+    prefix="/api/v1/auth",
+    tags=["Authentication"],
 )
 
 

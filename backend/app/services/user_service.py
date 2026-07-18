@@ -1,12 +1,9 @@
 from fastapi import HTTPException, status
-from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
+from app.auth.security import hash_password
 from app.models.user import User
 from app.schemas.user import UserCreate
-
-
-password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def create_user(db: Session, user_data: UserCreate) -> User:
@@ -20,7 +17,7 @@ def create_user(db: Session, user_data: UserCreate) -> User:
     user = User(
         name=user_data.name,
         email=user_data.email,
-        hashed_password=password_context.hash(user_data.password),
+        hashed_password=hash_password(user_data.password),
     )
     db.add(user)
     db.commit()
