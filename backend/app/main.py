@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from app.core.config import settings
 from app.database.database import Base, engine
-from app.api import auth, users
+from app.api import analysis, auth, evaluation, interview, resume, users
+from app.api import evaluation
 
 
 import app.models
@@ -21,9 +22,39 @@ app.include_router(
 )
 
 app.include_router(
+    evaluation.router,
+    prefix="/api/v1/interview",
+    tags=["Interview Evaluation"],
+)
+
+app.include_router(
     auth.router,
     prefix="/api/v1/auth",
     tags=["Authentication"],
+)
+
+app.include_router(
+    resume.router,
+    prefix="/api/v1/resume",
+    tags=["Resume"],
+)
+
+app.include_router(
+    analysis.router,
+    prefix="/api/v1/resume",
+    tags=["Resume Analysis"],
+)
+
+app.include_router(
+    interview.router,
+    prefix="/api/v1/interview",
+    tags=["Interview"],
+)
+
+app.include_router(
+    evaluation.router,
+    prefix="/api/v1/interview",
+    tags=["Interview Evaluation"],
 )
 
 
