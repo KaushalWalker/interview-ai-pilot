@@ -3,7 +3,7 @@ from app.core.config import settings
 from app.database.database import Base, engine
 from app.api import analysis, auth, evaluation, interview, resume, users
 from app.api import evaluation
-
+from fastapi.middleware.cors import CORSMiddleware
 
 import app.models
 
@@ -13,6 +13,17 @@ Base.metadata.create_all(bind=engine)  # creating database
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.PROJECT_VERSION,   
+)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(
