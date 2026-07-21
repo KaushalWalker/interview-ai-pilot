@@ -8,11 +8,19 @@ export type InterviewQuestion = {
 }
 
 export type Evaluation = {
-  score: number
+  overall_score: number
+  technical_accuracy: number
+  communication: number
+  problem_solving: number
+  confidence: number
   strengths: string[]
   improvements: string[]
+  missed_points: string[]
+  follow_up_question: string
   feedback: string
   ideal_answer: string
+  interviewer_notes: string
+  hire_recommendation: 'Strong Hire' | 'Hire' | 'Borderline' | 'No Hire'
 }
 
 type InterviewContextValue = {

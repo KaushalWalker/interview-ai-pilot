@@ -1,19 +1,27 @@
 # Python
-backend/.venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
 
-# Environment
-.env
+# Virtual environment
+backend/venv/
+
+# Environment variables
+backend/.env
+
+# SQLite database
+*.db
 
 # Node
 frontend/node_modules/
 
-# Vite
+# Frontend build
 frontend/dist/
 
-# VS Code
+# IDE
 .vscode/
+.idea/
 
-# macOS
+# OS
 .DS_Store
+Thumbs.db
