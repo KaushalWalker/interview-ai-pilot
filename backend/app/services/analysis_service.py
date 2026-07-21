@@ -3,6 +3,7 @@ import json
 from fastapi import HTTPException, status
 from pydantic import ValidationError
 
+
 from app.schemas.analysis import (
     ResumeAnalysisRequest,
     ResumeAnalysisResponse,

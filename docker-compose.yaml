@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: interviewpilot-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: interviewpilot
+      POSTGRES_PASSWORD: interviewpilot_password
+      POSTGRES_DB: interviewpilot
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: interviewpilot-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://interviewpilot:interviewpilot_password@postgres:5432/interviewpilot
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: interviewpilot-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+
+#The service name postgres acts as the hostname.
