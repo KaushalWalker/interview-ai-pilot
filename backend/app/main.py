@@ -21,7 +21,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:5174",
-        "interview-ai-pilot-dcpridgta-walker11.vercel.app"
+        "http://interview-ai-pilot-dcpridgta-walker11.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
