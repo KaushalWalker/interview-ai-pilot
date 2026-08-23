@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const apiClient = axios.create({
-  baseURL: 'https://my-backend.onrender.com',
+  baseURL: 'https://interview-ai-pilot.onrender.com',
 })
 
 apiClient.interceptors.request.use((config) => {
