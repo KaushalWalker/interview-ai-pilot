@@ -16,15 +16,16 @@ app = FastAPI(
 )
 
 
-from fastapi.middleware.cors import CORSMiddleware
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "https://interview-ai-pilot.vercel.app",
-    ],
+   allow_origins=[
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://interview-ai-pilot.vercel.app",
+    "https://interview-ai-pilot-h53g63ml6-walker11.vercel.app",
+],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
