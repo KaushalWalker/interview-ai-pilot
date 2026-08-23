@@ -10,10 +10,10 @@ The application uses a React frontend, FastAPI backend, PostgreSQL database, and
 https://interview-ai-pilot.vercel.app
 
 **Backend API:**  
-https://interview-ai-pilot-production.up.railway.app
+https://interview-ai-pilot.onrender.com
 
 **API Documentation:**  
-https://interview-ai-pilot-production.up.railway.app/docs
+https://interview-ai-pilot.onrender.com/docs
 
 ---
 
