@@ -1,79 +1,84 @@
 from fastapi import FastAPI
+
 from app.core.config import settings
 from app.database.database import Base, engine
 from app.api import analysis, auth, evaluation, interview, resume, users
-from app.api import evaluation
+
 from fastapi.middleware.cors import CORSMiddleware
 
 import app.models
 
-Base.metadata.create_all(bind=engine)  # creating database
+
+# Create database tables
+Base.metadata.create_all(bind=engine)
 
 
+# Create FastAPI application
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    version=settings.PROJECT_VERSION,   
+    version=settings.PROJECT_VERSION,
 )
 
 
-
-
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
-   allow_origins=[
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "https://interview-ai-pilot.vercel.app",
-    "https://interview-ai-pilot-h53g63ml6-walker11.vercel.app",
-],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origin_regex=r"https://interview-ai-pilot.*\.vercel\.app",
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+
+# Users
 app.include_router(
     users.router,
     prefix="/api/v1/users",
     tags=["Users"],
 )
 
+
+# Interview Evaluation
 app.include_router(
     evaluation.router,
     prefix="/api/v1/interview",
     tags=["Interview Evaluation"],
 )
 
+
+# Authentication
 app.include_router(
     auth.router,
     prefix="/api/v1/auth",
     tags=["Authentication"],
 )
 
+
+# Resume
 app.include_router(
     resume.router,
     prefix="/api/v1/resume",
     tags=["Resume"],
 )
 
+
+# Resume Analysis
 app.include_router(
     analysis.router,
     prefix="/api/v1/resume",
     tags=["Resume Analysis"],
 )
 
+
+# Interview
 app.include_router(
     interview.router,
     prefix="/api/v1/interview",
     tags=["Interview"],
 )
 
+
+# Interview Evaluation
 app.include_router(
     evaluation.router,
     prefix="/api/v1/interview",
@@ -83,7 +88,7 @@ app.include_router(
 
 @app.get("/")
 def root():
-    return{
+    return {
         "project": settings.PROJECT_NAME,
         "version": settings.PROJECT_VERSION,
     }
@@ -95,4 +100,3 @@ def health():
         "status": "healthy",
         "database": settings.DATABASE_URL,
     }
-
